@@ -1,6 +1,9 @@
 {
+    "name": "azazelllo/helpcore",
+    "type": "library",
+    "description": "Help core for projects.",
+    "keywords": ["Help", "core", "for", "projects"],
     "require": {
-        "robmorgan/phinx": "*",
-        "azazelllo/helpcore": "*"
+        "php": ">=5.0.0"
     }
 }
