@@ -161,7 +161,7 @@ class DBCore{
             $prepareBind = array();
             foreach($bind as $variable => $value){
                 /*Если значение не скалярное, то игнорируем его*/
-                if(!is_scalar($value)){
+                if(!is_scalar($value) && !is_null($value)){
                     continue;
                 }
                 /*Фикс - имя параметра должно начинаться с двоеточия*/
@@ -176,7 +176,7 @@ class DBCore{
                 $paramType = self::_getParamType($value);
                 $prepareBind[$variable] = array(
                     'value' => $value,
-                    'type' => self::_getParamType($value),
+                    'type' => $paramType,
                 );
             }
             /*Связываем переменные*/
