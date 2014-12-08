@@ -3,8 +3,19 @@
     "version": "0.0.1",
     "type": "library",
     "description": "Help core for projects.",
-    "keywords": ["Help", "core", "for", "projects"],
+    "keywords": [
+        "Help",
+        "core",
+        "for",
+        "projects"
+    ],
     "require": {
         "php": ">=5.0.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "MyCompanyNamespace": ""
+        }
     }
+
 }
