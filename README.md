@@ -1,4 +1,4 @@
 helpcore
 ========
 
-Help core for projects
+Help core for projects.
