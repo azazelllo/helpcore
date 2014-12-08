@@ -90,6 +90,11 @@ class DBCore{
     private $dbh;
 
     /**
+     * @var DBCore
+     */
+    private static $defaultDBCore;
+
+    /**
      * @var int Кол-во открытых транзакций
      */
     private $countTransaction;
@@ -315,5 +320,16 @@ class DBCore{
      */
     public function update($tableName){
         return new DBCoreQueryUpdate($tableName, $this);
+    }
+
+    public static function setDefaultDB($defaultDBCore){
+        self::$defaultDBCore = $defaultDBCore;
+    }
+
+    /**
+     * @return DBCore
+     */
+    public static function DB(){
+        return self::$defaultDBCore;
     }
 }
