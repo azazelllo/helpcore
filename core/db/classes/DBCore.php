@@ -204,6 +204,8 @@ class DBCore{
                     $q->execute();
                     if(preg_match('#^pgsql#', $this->dbh) && !is_null($seqName)){
                         $seq = $seqName;
+                    }else{
+                        $seq = null;
                     }
                     $result = $this->pdo->lastInsertId($seq);
                     break;
