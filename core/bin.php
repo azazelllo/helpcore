@@ -17,6 +17,7 @@ $files = array(
     '/db/classes/query/DBCoreQuerySelect.php',
     '/db/classes/query/DBCoreQueryInsert.php',
     '/db/classes/query/DBCoreQueryUpdate.php',
+    '/db/classes/query/DBCoreQueryDelete.php',
     '/db/classes/fields/DBCoreField.php',
     '/db/classes/fields/DBCoreFieldInteger.php',
     '/validators/classes/Validator.php',

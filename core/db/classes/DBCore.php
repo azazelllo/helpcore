@@ -325,6 +325,14 @@ class DBCore{
         return new DBCoreQueryUpdate($tableName, $this);
     }
 
+    /**
+     * @param $tableName
+     * @return DBCoreQueryDelete
+     */
+    public function delete($tableName){
+        return new DBCoreQueryDelete($tableName, $this);
+    }
+
     public static function setDefaultDB($defaultDBCore){
         self::$defaultDBCore = $defaultDBCore;
     }
