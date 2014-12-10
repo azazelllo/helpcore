@@ -9,6 +9,8 @@
 /**
  * Class DBCoreQueryUpdate
  * @method DBCoreQueryUpdate set
+ * @method DBCoreQueryUpdate and
+ * @method DBCoreQueryUpdate or
  */
 class DBCoreQueryUpdate extends DBCoreQueryWhere{
     private $tableName;

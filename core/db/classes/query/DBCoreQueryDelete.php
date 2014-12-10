@@ -8,6 +8,9 @@
 
 /**
  * Class DBCoreQueryDelete
+ *
+ * @method DBCoreQueryDelete and
+ * @method DBCoreQueryDelete or
  */
 class DBCoreQueryDelete extends DBCoreQueryWhere{
     private $tableName;
@@ -43,6 +46,10 @@ class DBCoreQueryDelete extends DBCoreQueryWhere{
         $this->sqlBind = $sql;
     }
 
+    /**
+     * @param array $bindArray
+     * @return DBCoreRowListIterator|mixed|null|PDOStatement|string
+     */
     public function execute($bindArray = array()){
         $this->_build();
         $sql = $this->sqlBind;
