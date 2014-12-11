@@ -76,6 +76,16 @@ class DBCore{
     const RESULT_TYPE_ALL_OBJECT = 9;
 
     /**
+     * Вернет итератор на первый столбец выборки
+     */
+    const RESULT_TYPE_COLUMN_ITERATOR = 10;
+
+    /**
+     * Вернет массив состоящий из элементов первого столбца выборки
+     */
+    const RESULT_TYPE_COLUMN_ALL = 11;
+
+    /**
      * Тип результата по умолчанию
      */
     const RESULT_TYPE_DEFAULT = self::RESULT_TYPE_LIST_ITERATOR_OBJECT;
@@ -232,6 +242,21 @@ class DBCore{
                 case self::RESULT_TYPE_ALL_OBJECT:
                     $q->execute();
                     $result = $q->fetchAll(PDO::FETCH_OBJ);
+                    break;
+                case self::RESULT_TYPE_COLUMN_ITERATOR:
+                    $result = new DBCoreRowListIterator($q, PDO::FETCH_COLUMN);
+                    break;
+                case self::RESULT_TYPE_COLUMN_ALL:
+                    $q->execute();
+                    $result = $q->fetchAll(PDO::FETCH_COLUMN);
+//                    $colName = null;
+//                    if(count($result)){
+//                        $colName = array_keys($result[0]);
+//                        $colName = $colName[0];
+//                    }
+//                    foreach($result as &$item){
+//                        $item = $item[$colName];
+//                    }
                     break;
             }
         }
