@@ -31,6 +31,7 @@ class DBCoreQueryUpdate extends DBCoreQueryWhere{
         if($name=='set'){
             return $this->_set($arguments);
         }
+        return parent::__call($name, $arguments);
     }
 
     private static function _parseArguments($arguments){
