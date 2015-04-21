@@ -141,7 +141,7 @@ class DBCore{
     public function __construct($dbh, $username=null, $password=null, $driverOptions=null){
         $this->dbh = $dbh;
         $this->pdo = new PDO($dbh, $username, $password, $driverOptions);
-        $this->pdo->query('SET NAMES utf8');
+//        $this->pdo->query('SET NAMES utf8');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->countTransaction = 0;
         $this->_resetSelect();
