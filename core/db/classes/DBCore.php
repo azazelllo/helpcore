@@ -95,7 +95,7 @@ class DBCore{
      *
      * @var PDO
      */
-    private $pdo;
+    private $pdo = null;
 
     private $dbh;
 
@@ -108,6 +108,10 @@ class DBCore{
      * @var int Кол-во открытых транзакций
      */
     private $countTransaction;
+
+    private $username;
+    private $password;
+    private $driverOptions;
 
     private static function _getParamType($var){
         $resultParamType = PDO::PARAM_STR;
@@ -135,22 +139,32 @@ class DBCore{
         );
     }
 
+    private function _init(){
+        if(is_null($this->pdo)){
+            $this->pdo = new PDO($this->dbh, $this->username, $this->password, $this->driverOptions);
+//        $this->pdo->query('SET NAMES utf8');
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->countTransaction = 0;
+            $this->_resetSelect();
+        }
+    }
+
     /**
      * @param $dbh string DSN, содержащее информацию, необходимую для подключения к базе данных.
      */
     public function __construct($dbh, $username=null, $password=null, $driverOptions=null){
         $this->dbh = $dbh;
-        $this->pdo = new PDO($dbh, $username, $password, $driverOptions);
-//        $this->pdo->query('SET NAMES utf8');
-        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->countTransaction = 0;
-        $this->_resetSelect();
+        $this->username = $username;
+        $this->password = $password;
+        $this->driverOptions = $driverOptions;
+        $this->_init();
     }
 
     public function __destruct(){
         if($this->countTransaction>0){
             $this->rollBackTransaction();
         }
+        $this->disconnect();
     }
 
     /**
@@ -358,6 +372,10 @@ class DBCore{
         return new DBCoreQueryDelete($tableName, $this);
     }
 
+    public function disconnect(){
+        $this->pdo = null;
+    }
+
     public static function setDefaultDB($defaultDBCore){
         self::$defaultDBCore = $defaultDBCore;
     }
@@ -366,6 +384,7 @@ class DBCore{
      * @return DBCore
      */
     public static function DB(){
+        self::$defaultDBCore->_init();
         return self::$defaultDBCore;
     }
 }
